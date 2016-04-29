@@ -43,6 +43,18 @@ public class Enhanced9Patch extends Drawable {
     protected List<StretchSpace> mHeightSpaces;
     protected int[] mHeightStretchWidths;
 
+    //MainStretch
+
+    int mMainStretchWidthIndex=0;
+    int mMainStretchHeightIndex=0;
+
+    public void setMainStretchHeightIndex(int pMainStretchHeightIndex) {
+        mMainStretchHeightIndex = pMainStretchHeightIndex;
+    }
+
+    public void setMainStretchWidthIndex(int pMainStretchWidthIndex) {
+        mMainStretchWidthIndex = pMainStretchWidthIndex;
+    }
 
     protected Rect mPaddings;
 
@@ -70,7 +82,8 @@ public class Enhanced9Patch extends Drawable {
 
         mWidthStretchWidths = new int[mWidthStretchSpaces.size()];
         for (StretchSpace lStretchSpace : mWidthStretchSpaces) {
-            stretchWidthRegionTo(lStretchSpace.index, lStretchSpace.width());
+            mWidthStretchWidths[lStretchSpace.index] = lStretchSpace.width();
+
         }
 
         //Height
@@ -80,11 +93,10 @@ public class Enhanced9Patch extends Drawable {
         fillStretchRegionsHeight(mHeightSpaces, mDrawable.getWidth()-1);
         mHeightStretchWidths = new int[mHeightStretchSpaces.size()];
         for (StretchSpace lStretchSpace : mHeightStretchSpaces) {
-            stretchHeightRegionTo(lStretchSpace.index, lStretchSpace.width());
+            mHeightStretchWidths[lStretchSpace.index] = lStretchSpace.width();
         }
 
-        recalcTotalWidth();
-        recalcTotalHeight();
+        recalcSize();
 
         mPaddings = new Rect();
         fillPaddings();
@@ -149,12 +161,12 @@ public class Enhanced9Patch extends Drawable {
     public void stretchWidthRegionTo(int pIndex, int pNewWidth) {
 
         mWidthStretchWidths[pIndex] = pNewWidth;
-        recalcTotalWidth();
+        recalcSize();
     }
     public void stretchHeightRegionTo(int pIndex, int pNewWidth) {
 
         mHeightStretchWidths[pIndex] = pNewWidth;
-        recalcTotalHeight();
+        recalcSize();
     }
 
     private void recalcTotalWidth() {
@@ -284,7 +296,37 @@ public class Enhanced9Patch extends Drawable {
     @Override
     public void setBounds(int left, int top, int right, int bottom) {
         super.setBounds(left, top, right, bottom);
+        recalcSize();
 
+    }
+
+    private void recalcSize(){
+        recalcTotalHeight();
+        recalcTotalWidth();
+        while (recalcWithBounds()){
+            recalcTotalHeight();
+            recalcTotalWidth();
+        }
+    }
+    private boolean recalcWithBounds() {
+        Rect lRect = getBounds();
+        boolean result = false;
+        if (mTotalWidth==0||mTotalHeight==0){
+            return true;
+        }
+        if (lRect.width()==0 || lRect.height()==0)
+            return false;
+        if (mTotalWidth<lRect.width()){
+            mWidthStretchWidths[mMainStretchWidthIndex] += lRect.width()-mTotalWidth;
+            result = true;
+//            stretchWidthRegionTo(mMainStretchWidthIndex,lRect.width()-mTotalWidth);
+        }
+        if (mTotalHeight<lRect.height()){
+            mHeightStretchWidths[mMainStretchHeightIndex] += lRect.height()-mTotalHeight;
+            result = true;
+//            stretchHeightRegionTo(mMainStretchHeightIndex, lRect.height()-mTotalHeight);
+        }
+        return result;
     }
 
     @Override

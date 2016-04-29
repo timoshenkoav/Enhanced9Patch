@@ -22,9 +22,12 @@ public class MainActivity extends AppCompatActivity {
 
         Enhanced9Patch lEnhanced9Patch = new Enhanced9Patch(BitmapFactory.decodeResource(getResources(), R.drawable.highlight));
 
-        lEnhanced9Patch.stretchWidthRegionTo(1, 200);
-        lEnhanced9Patch.stretchWidthRegionTo(3, 200);
-        lEnhanced9Patch.stretchHeightRegionTo(1, 200);
+        lEnhanced9Patch.setMainStretchWidthIndex(3);
+        lEnhanced9Patch.setMainStretchHeightIndex(1);
+
+        lEnhanced9Patch.stretchWidthRegionTo(1, 100);
+        lEnhanced9Patch.stretchWidthRegionTo(3, 10);
+        lEnhanced9Patch.stretchHeightRegionTo(1, 10);
 
         lImageView.setBackgroundDrawable(lEnhanced9Patch);
     }
