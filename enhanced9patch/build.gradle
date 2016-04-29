@@ -1,12 +1,11 @@
-apply plugin: 'com.android.application'
-
+apply plugin: 'com.android.library'
+apply plugin: 'com.bmuschko.nexus'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.tunebrains.enhanced9path"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
@@ -21,10 +20,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.tunebrains.general:log:0.0.6'
-    compile project(':enhanced9patch')
 }
 
+group = 'com.tunebrains'
+version = '0.0.1'
+
+apply from: 'upload.gradle'

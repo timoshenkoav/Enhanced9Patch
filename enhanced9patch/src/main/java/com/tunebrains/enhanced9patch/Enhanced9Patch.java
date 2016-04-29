@@ -1,4 +1,4 @@
-package com.tunebrains.enhanced9path;
+package com.tunebrains.enhanced9patch;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -7,8 +7,6 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-
-import com.tunebrains.loggerlib.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -60,7 +58,6 @@ public class Enhanced9Patch extends Drawable {
 
 
     public Enhanced9Patch(Bitmap pDrawable) {
-        long start = System.currentTimeMillis();
         mDrawable = pDrawable;
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
@@ -100,8 +97,8 @@ public class Enhanced9Patch extends Drawable {
 
         mPaddings = new Rect();
         fillPaddings();
-        long end = System.currentTimeMillis();
-        Logger.e("Constructor: %d",end-start);
+
+
     }
 
     private void fillPaddings() {
@@ -246,7 +243,6 @@ public class Enhanced9Patch extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        long start = System.currentTimeMillis();
         Rect lSourceRect = new Rect();
         Rect lDestRect = new Rect();
         int startX = 0;
@@ -263,8 +259,6 @@ public class Enhanced9Patch extends Drawable {
             }
             startX += mWidthStretchWidths[lWidthSpace.index];
         }
-        long end = System.currentTimeMillis();
-        Logger.e("Draw: %d",end-start);
     }
 
     @Override

@@ -3,9 +3,9 @@ package com.tunebrains.enhanced9path;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.tunebrains.enhanced9patch.Enhanced9Patch;
 import com.tunebrains.loggerlib.AndroidLogStrategy;
 import com.tunebrains.loggerlib.LogLevels;
 import com.tunebrains.loggerlib.Logger;
