@@ -20,14 +20,15 @@ public class MainActivity extends AppCompatActivity {
         Logger.registerStrategy(new AndroidLogStrategy(), LogLevels.LEVEL.VERBOSE);
         LinearLayout lImageView = (LinearLayout) findViewById(R.id.image_view);
 
-        Enhanced9Patch lEnhanced9Patch = new Enhanced9Patch(BitmapFactory.decodeResource(getResources(), R.drawable.highlight));
 
-        lEnhanced9Patch.setMainStretchWidthIndex(3);
+        Enhanced9Patch lEnhanced9Patch = new Enhanced9Patch(BitmapFactory.decodeResource(getResources(), R.drawable.ic_popup_keyboard_bg));
+
+        lEnhanced9Patch.setMainStretchWidthIndex(1);
         lEnhanced9Patch.setMainStretchHeightIndex(1);
 
-        lEnhanced9Patch.stretchWidthRegionTo(1, 100);
-        lEnhanced9Patch.stretchWidthRegionTo(3, 10);
-        lEnhanced9Patch.stretchHeightRegionTo(1, 10);
+//        lEnhanced9Patch.stretchWidthRegionTo(1, 100);
+//        lEnhanced9Patch.stretchWidthRegionTo(3, 10);
+//        lEnhanced9Patch.stretchHeightRegionTo(1, 10);
 
         lImageView.setBackgroundDrawable(lEnhanced9Patch);
     }

@@ -87,7 +87,7 @@ public class Enhanced9Patch extends Drawable {
         mHeightStretchSpaces = new LinkedList<>();
         fillStretchRegionsHeight(mHeightStretchSpaces,0);
         mHeightSpaces = new LinkedList<>();
-        fillStretchRegionsHeight(mHeightSpaces, mDrawable.getWidth()-1);
+        fillStretchRegionsHeight(mHeightSpaces, mDrawable.getWidth()-2);
         mHeightStretchWidths = new int[mHeightStretchSpaces.size()];
         for (StretchSpace lStretchSpace : mHeightStretchSpaces) {
             mHeightStretchWidths[lStretchSpace.index] = lStretchSpace.width();
@@ -106,35 +106,35 @@ public class Enhanced9Patch extends Drawable {
         int right = 0;
         int top = 0;
         int bottom = 0;
-        for (int i=0;i<mDrawable.getWidth();++i){
+        for (int i=1;i<mDrawable.getWidth()-2;++i){
             int color = mDrawable.getPixel(i,mDrawable.getHeight()-1);
             if (color == Color.BLACK){
                 left=i;
                 break;
             }
         }
-        for (int i=mDrawable.getWidth()-1;i>=0;--i){
+        for (int i=mDrawable.getWidth()-3;i>=1;--i){
             int color = mDrawable.getPixel(i,mDrawable.getHeight()-1);
             if (color == Color.BLACK){
                 right=mDrawable.getWidth()-i;
                 break;
             }
         }
-        for (int i=0;i<mDrawable.getHeight();++i){
+        for (int i=1;i<mDrawable.getHeight()-2;++i){
             int color = mDrawable.getPixel(mDrawable.getWidth()-1,i);
             if (color == Color.BLACK){
                 top=i;
                 break;
             }
         }
-        for (int i=mDrawable.getHeight()-1;i>=0;--i){
+        for (int i=mDrawable.getHeight()-3;i>=1;--i){
             int color = mDrawable.getPixel(mDrawable.getWidth()-1,i);
             if (color == Color.BLACK){
                 bottom=mDrawable.getHeight()-i;
                 break;
             }
         }
-        mPaddings.set(left, top, right, bottom);
+        mPaddings.set(left-1, top-1, right-3, bottom-3);
 
     }
 
@@ -189,7 +189,7 @@ public class Enhanced9Patch extends Drawable {
 
         StretchSpace lStretchSpace = new StretchSpace();
         int lastColor = Integer.MAX_VALUE;
-        for (int i = 0; i < mDrawable.getHeight(); ++i) {
+        for (int i = 1; i < mDrawable.getHeight()-2; ++i) {
             int color = mDrawable.getPixel(x, i);
             if (lastColor != color) {
                 if (lStretchSpace.start == -1) {
@@ -207,7 +207,7 @@ public class Enhanced9Patch extends Drawable {
             }
         }
         if (lStretchSpace.start != -1 && lStretchSpace.end == -1) {
-            lStretchSpace.end = mDrawable.getWidth() - 1;
+            lStretchSpace.end = mDrawable.getHeight() - 3;
             lStretchSpace.index = pSpaces.size();
             pSpaces.add(lStretchSpace);
         }
@@ -216,7 +216,7 @@ public class Enhanced9Patch extends Drawable {
 
         StretchSpace lStretchSpace = new StretchSpace();
         int lastColor = Integer.MAX_VALUE;
-        for (int i = 0; i < mDrawable.getWidth(); ++i) {
+        for (int i = 1; i < mDrawable.getWidth()-2; ++i) {
             int color = mDrawable.getPixel(i, y);
             if (lastColor != color) {
                 if (lStretchSpace.start == -1) {
@@ -234,7 +234,7 @@ public class Enhanced9Patch extends Drawable {
             }
         }
         if (lStretchSpace.start != -1 && lStretchSpace.end == -1) {
-            lStretchSpace.end = mDrawable.getWidth() - 1;
+            lStretchSpace.end = mDrawable.getWidth() - 3;
             lStretchSpace.index = pSpaces.size();
             pSpaces.add(lStretchSpace);
         }

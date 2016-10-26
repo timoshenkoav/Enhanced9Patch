@@ -16,6 +16,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView android:layout_width="100dp" android:layout_height="100dp"
-                  android:background="#11ff0000"/>
+                  android:background="#ff0000"/>
     </LinearLayout>
 </RelativeLayout>
